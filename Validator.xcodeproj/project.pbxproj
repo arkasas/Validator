@@ -10,6 +10,10 @@
 		B9944A7520AC26E200C06DFA /* Validator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9944A6B20AC26E200C06DFA /* Validator.framework */; };
 		B9944A7A20AC26E200C06DFA /* ValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9944A7920AC26E200C06DFA /* ValidatorTests.swift */; };
 		B9944A7C20AC26E200C06DFA /* Validator.h in Headers */ = {isa = PBXBuildFile; fileRef = B9944A6E20AC26E200C06DFA /* Validator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B9944A8820AC274100C06DFA /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9944A8720AC274100C06DFA /* Regex.swift */; };
+		B9944A8A20AC279300C06DFA /* SimpleRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9944A8920AC279300C06DFA /* SimpleRegex.swift */; };
+		B9944A8C20AC2EF000C06DFA /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9944A8B20AC2EF000C06DFA /* Validator.swift */; };
+		B9944AC820AC384900C06DFA /* Pair.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9944AC720AC384900C06DFA /* Pair.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +33,10 @@
 		B9944A7420AC26E200C06DFA /* ValidatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValidatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9944A7920AC26E200C06DFA /* ValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
 		B9944A7B20AC26E200C06DFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9944A8720AC274100C06DFA /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
+		B9944A8920AC279300C06DFA /* SimpleRegex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRegex.swift; sourceTree = "<group>"; };
+		B9944A8B20AC2EF000C06DFA /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		B9944AC720AC384900C06DFA /* Pair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pair.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +79,12 @@
 		B9944A6D20AC26E200C06DFA /* Validator */ = {
 			isa = PBXGroup;
 			children = (
+				B9944A8620AC273600C06DFA /* Protocol */,
 				B9944A6E20AC26E200C06DFA /* Validator.h */,
 				B9944A6F20AC26E200C06DFA /* Info.plist */,
+				B9944A8920AC279300C06DFA /* SimpleRegex.swift */,
+				B9944A8B20AC2EF000C06DFA /* Validator.swift */,
+				B9944AC720AC384900C06DFA /* Pair.swift */,
 			);
 			path = Validator;
 			sourceTree = "<group>";
@@ -84,6 +96,14 @@
 				B9944A7B20AC26E200C06DFA /* Info.plist */,
 			);
 			path = ValidatorTests;
+			sourceTree = "<group>";
+		};
+		B9944A8620AC273600C06DFA /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B9944A8720AC274100C06DFA /* Regex.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +168,7 @@
 				TargetAttributes = {
 					B9944A6A20AC26E200C06DFA = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0930;
 					};
 					B9944A7320AC26E200C06DFA = {
 						CreatedOnToolsVersion = 9.3;
@@ -194,6 +215,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9944A8820AC274100C06DFA /* Regex.swift in Sources */,
+				B9944AC820AC384900C06DFA /* Pair.swift in Sources */,
+				B9944A8C20AC2EF000C06DFA /* Validator.swift in Sources */,
+				B9944A8A20AC279300C06DFA /* SimpleRegex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +364,7 @@
 		B9944A8020AC26E200C06DFA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -356,6 +382,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pl.apitula.Validator;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -364,6 +391,7 @@
 		B9944A8120AC26E200C06DFA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -389,6 +417,7 @@
 		B9944A8320AC26E200C06DFA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5AG4QGJY7S;
 				INFOPLIST_FILE = ValidatorTests/Info.plist;
@@ -407,6 +436,7 @@
 		B9944A8420AC26E200C06DFA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5AG4QGJY7S;
 				INFOPLIST_FILE = ValidatorTests/Info.plist;
