@@ -103,4 +103,56 @@ class ValidatorTests: XCTestCase {
         XCTAssertTrue(validator.validate("111111111111", regex: CreditCardRegex()).result)
         XCTAssertTrue(validator.validate("1111111111111111111", regex: CreditCardRegex()).result)
     }
+
+
+    func testOrRegex() {
+        let regex = EmailRegex() | PeselRegex()
+        XCTAssertTrue(validator.validate("00000000000", regex: [regex]).result)
+        XCTAssertTrue(validator.validate("test@test.com", regex: regex).result)
+        XCTAssertFalse(validator.validate("ddd22", regex: regex).result)
+        XCTAssertFalse(validator.validate("", regex: regex).result)
+    }
+
+    func testAndRegex() {
+        let regex = EmailRegex() & StrongPasswordRegex()
+        XCTAssertFalse(validator.validate("", regex: regex).result)
+        XCTAssertFalse(validator.validate("test@test.com", regex: regex).result)
+        XCTAssertFalse(validator.validate("Zaq12345", regex: regex).result)
+        XCTAssertTrue(validator.validate("Test@tes1t.com", regex: regex).result)
+    }
+
+    func testAndOrRegex() {
+        let regex = (EmailRegex() | PeselRegex()) & StrongPasswordRegex()
+        XCTAssertFalse(validator.validate("", regex: regex).result)
+        XCTAssertFalse(validator.validate("test@test.com", regex: regex).result)
+        XCTAssertFalse(validator.validate("Zaq12345", regex: regex).result)
+        XCTAssertTrue(validator.validate("Test@tes1t.com", regex: regex).result)
+        XCTAssertFalse(validator.validate("00000000000", regex: regex).result)
+    }
+
+    func testMinimumLength() {
+        XCTAssertTrue(validator.validate("", regex: MinimumLengthRegex(minimum: 0)).result)
+        XCTAssertTrue(validator.validate("1", regex: MinimumLengthRegex(minimum: 1)).result)
+        XCTAssertFalse(validator.validate("111", regex: MinimumLengthRegex(minimum: 5)).result)
+    }
+
+    func testMaximumLength() {
+        let reg = MaximumLengthRegex(maximum: 10)
+
+        XCTAssertFalse(validator.validate("11111111111", regex: reg).result)
+        XCTAssertTrue(validator.validate("11", regex: reg).result)
+    }
+
+    func testSpecifiedLength() {
+        let reg = SpecifiedLengthRegex(min: 5, max: 10)
+        XCTAssertFalse(validator.validate("", regex: reg).result)
+        XCTAssertFalse(validator.validate("111", regex: reg).result)
+        XCTAssertFalse(validator.validate("1111", regex: reg).result)
+        XCTAssertFalse(validator.validate("asdfghjkloi", regex: reg).result)
+        XCTAssertTrue(validator.validate("drtgh", regex: reg).result)
+        XCTAssertTrue(validator.validate("dfrtufsw", regex: reg).result)
+        XCTAssertTrue(validator.validate("edcvfrtgbn", regex: reg).result)
+
+    }
+
 }
