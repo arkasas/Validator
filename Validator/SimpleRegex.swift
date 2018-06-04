@@ -66,6 +66,8 @@ public class LetterRegexWithoutSpaceRegex: Regex {
 
 public class AlphabeticStringFirstLetterCapsRegex: Regex {
 
+    public init() {}
+
     public var regex: String {
         return "^[A-Z]+[a-zA-Z]*$"
     }
@@ -78,6 +80,8 @@ public class AlphabeticStringFirstLetterCapsRegex: Regex {
 
 public class AlphabeticStringWithSpaceRegex: Regex {
 
+    public init() {}
+
     public var regex: String {
         return "^[a-zA-Z ]*$"
     }
@@ -88,6 +92,8 @@ public class AlphabeticStringWithSpaceRegex: Regex {
 }
 
 public class PostCodeRegex: Regex {
+
+    public init() {}
 
     public var regex: String {
         return "^\\d{2}-\\d{3}$"
@@ -100,6 +106,8 @@ public class PostCodeRegex: Regex {
 
 public class CreditCardRegex: Regex {
 
+    public init() {}
+
     public var regex: String {
         return "^[0-9 ]{12,19}$"
     }
@@ -108,3 +116,65 @@ public class CreditCardRegex: Regex {
         return "CreditCardRegex is not valid"
     }
 }
+
+public class PeselRegex: Regex {
+
+    public init() {}
+
+    public var regex: String {
+        return "^[0-9]{11}$"
+    }
+
+    public var errorMessage: String {
+        return "PeselRegex is not valid"
+    }
+}
+
+public class MinimumLengthRegex: Regex {
+
+    public var regex: String
+    public var errorMessage: String {
+        return "MinimumLengthRegex is not valid"
+    }
+
+
+    init(minimum: Int) {
+        if minimum < 0 {
+            fatalError("minimum cannot be < 0")
+        }
+        regex = "^.{\(minimum),}$"
+    }
+}
+
+public class MaximumLengthRegex: Regex {
+
+    public var regex: String
+    public var errorMessage: String {
+        return "MaximumLengthRegex is not valid"
+    }
+
+    init(maximum: Int) {
+        if maximum < 0 {
+            fatalError("Maximum cannot be < 0")
+        }
+        regex = "^.{0,\(maximum)}$"
+    }
+}
+
+public class SpecifiedLengthRegex: Regex {
+
+    public var regex: String
+    public var errorMessage: String {
+        return "SpecifiedLengthRegex is not valid"
+    }
+
+    init(min: Int, max: Int) {
+        if min < 0 || max < 0 {
+            fatalError("Values cannot be < 0")
+        }
+
+        regex = "^.{\(min),\(max)}$"
+    }
+
+}
+

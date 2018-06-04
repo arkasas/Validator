@@ -11,6 +11,7 @@ import Foundation
 public class Validator {
 
     public typealias ValidCompletion = (result: Bool, wrong: [Regex]?)
+    public typealias ValidCompletionTextField = (result: Bool, pair: [Pair]?)
 
     public init() {}
 
@@ -32,7 +33,7 @@ public class Validator {
 
         var wrongArr = [Regex]()
         for r in regex {
-            if !isValidString(text, regex: r.regex) {
+            if !r.validate(text: text) {
                 wrongArr.append(r)
             }
         }
@@ -44,14 +45,14 @@ public class Validator {
         return (false, wrongArr)
     }
 
-    public func validateAll() -> ValidCompletion {
+    public func validateAll() -> ValidCompletionTextField {
 
-        var wrongArr = [Regex]()
+        var wrongArr = [Pair]()
 
         for pair in pairArray {
             let result = validate(pair.textField, regex: pair.regex)
             if result.wrong != nil {
-                wrongArr.append(contentsOf: result.wrong!)
+                wrongArr.append(Pair(textField: pair.textField, regex: result.wrong!))
             }
         }
 
@@ -62,10 +63,4 @@ public class Validator {
         return (false, wrongArr)
     }
 
-
-
-    private func isValidString(_ text: String, regex: String) -> Bool {
-        let stringTest = NSPredicate(format:"SELF MATCHES %@", regex)
-        return stringTest.evaluate(with: text)
-    }
 }
