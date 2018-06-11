@@ -30,7 +30,7 @@ public class StrongPasswordRegex: Regex {
     }
 
     public var errorMessage: String {
-        return "Email is not valid"
+        return "Password is not valid"
     }
 
 }
